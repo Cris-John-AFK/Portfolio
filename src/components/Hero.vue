@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { ArrowRight, Code, Database, LayoutTemplate } from 'lucide-vue-next'
+import { ArrowRight, Code, Database, LayoutTemplate, BookOpen } from 'lucide-vue-next'
 
 const heroProjects = ref([
   {
@@ -66,14 +66,14 @@ onUnmounted(() => {
           </h1>
           
           <h2 class="text-2xl md:text-3xl font-bold text-gray-700 dark:text-gray-300 mb-8 border-l-4 border-blue-500 pl-5 py-1 tracking-wide">
-            Creative Web Developer
+            Full Stack Web Developer
           </h2>
           
-          <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400, mb-10 max-w-lg leading-relaxed">
-            I build elegant, scalable, and user-friendly applications. I transform complex ideas into robust digital solutions with modern web technologies.
+          <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-8 max-w-lg leading-relaxed">
+            I build elegant, scalable, and user-friendly applications. Specializing in <strong class="text-gray-900 dark:text-gray-200 font-semibold">QR-based attendance systems</strong>, <strong class="text-gray-900 dark:text-gray-200 font-semibold">inventory management</strong>, <strong class="text-gray-900 dark:text-gray-200 font-semibold">POS solutions</strong>, <strong class="text-gray-900 dark:text-gray-200 font-semibold">portfolios</strong>, and <strong class="text-gray-900 dark:text-gray-200 font-semibold">DTR management apps</strong>.
           </p>
           
-          <div class="flex flex-col sm:flex-row gap-5">
+          <div class="flex flex-col sm:flex-row gap-5 mb-8 w-full">
             <a href="#projects" class="group inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-500/25 transition-all duration-300 hover:-translate-y-1">
               View Projects
               <ArrowRight class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -82,6 +82,24 @@ onUnmounted(() => {
               Let's Connect
             </a>
           </div>
+
+          <!-- Featured Research Highlight -->
+          <a 
+            href="https://www.researchgate.net/publication/401703874_LAMMS_A_Learner's_Attendance_Monitoring_and_Management_System_for_Naawan_Central_School_Misamis_Oriental_Philippines" 
+            target="_blank" 
+            class="group w-full max-w-lg flex items-center p-4 bg-white/40 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-500/30 rounded-2xl hover:bg-white/70 dark:hover:bg-blue-900/30 transition-colors shadow-sm dark:shadow-none"
+          >
+            <div class="bg-blue-100 dark:bg-blue-600/20 p-3 rounded-xl mr-4">
+              <BookOpen class="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div>
+              <p class="text-[10px] md:text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-0.5">Featured Publication</p>
+              <p class="text-sm md:text-base font-semibold text-gray-900 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-white transition-colors leading-tight">
+                LAMMS: QR-Based Attendance Monitoring System
+              </p>
+            </div>
+            <ArrowRight class="ml-auto w-5 h-5 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-white group-hover:translate-x-1 transition-all" />
+          </a>
         </div>
 
         <!-- Right Side: Ultra Premium Profile Image & Glass Projects -->
