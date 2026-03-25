@@ -6,6 +6,17 @@ const projects = ref([])
 const loading = ref(true)
 const githubUsername = 'Cris-John-AFK' // Updated to your true GitHub username
 
+// Want to use your own images instantly?
+// 1. Upload your screenshots into this website's "public" folder (e.g., public/portfolio-preview.png)
+// 2. Map the exact GitHub Repository Name to your image file name below:
+const customImages = {
+  'Portfolio': '/portfolio-preview.png',
+  'OJT_Manager_APP': '/ojt-preview.png',
+  'HR_Leave_Monitoring': '/hr-preview.png',
+  'Event-Attendance-System': '/event-preview.png'
+  // Add as many as you want here!
+}
+
 const fetchProjects = async () => {
   try {
     loading.value = true
@@ -32,6 +43,15 @@ const fetchProjects = async () => {
   } finally {
     loading.value = false
   }
+}
+
+const getImageUrl = (project) => {
+  // If you defined a custom local image above, use it immediately!
+  if (customImages[project.originalName]) {
+    return customImages[project.originalName]
+  }
+  // Otherwise, fallback to the GitHub generated preview (which updates slowly)
+  return `https://opengraph.githubassets.com/1/${project.ownerLogin}/${project.originalName}`
 }
 
 onMounted(() => {
@@ -65,7 +85,7 @@ onMounted(() => {
           <!-- Dynamic GitHub Social Preview / OpenGraph Image -->
           <div class="h-48 relative overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-900">
             <img 
-              :src="`https://opengraph.githubassets.com/1/${project.ownerLogin}/${project.originalName}`" 
+              :src="getImageUrl(project)" 
               :alt="project.name"
               class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
