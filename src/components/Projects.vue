@@ -272,7 +272,9 @@ onUnmounted(() => {
                   <ExternalLink class="w-5 h-5 mr-2" /> 
                   Live Demo
                 </a>
+                <!-- Only show Codebase if it's the public portfolio or OJT manager -->
                 <a 
+                  v-if="selectedProject.name.toLowerCase().includes('portfolio') || selectedProject.name.toLowerCase().includes('ojt')" 
                   :href="selectedProject.url" 
                   target="_blank"
                   class="flex items-center justify-center p-4 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-bold transition-all"
