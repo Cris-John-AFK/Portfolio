@@ -9,7 +9,7 @@ const githubUsername = 'Cris-John-AFK' // Updated to your true GitHub username
 // Want to use multiple images? Just use an array! 
 // e.g., 'Portfolio': ['/portfolio-1.png', '/portfolio-2.png']
 const customImages = {
-  'Portfolio': ['/portfolio-preview.png'],
+  'Portfolio': ['/portfolio-preview.png , /portfolio-preview.png2'],
   'OJT_Manager_APP': ['/ojt-preview.png'],
   'HR_Leave_Monitoring': ['/hr-preview.png'],
   'Event-Attendance-System': ['/event-preview.png']
