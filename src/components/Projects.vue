@@ -18,6 +18,8 @@ const fetchProjects = async () => {
         .map(repo => ({
           id: repo.id,
           name: repo.name.replace(/-/g, ' '),
+          originalName: repo.name,
+          ownerLogin: repo.owner.login,
           description: repo.description || 'A web development project built with modern technologies.',
           url: repo.html_url,
           homepage: repo.homepage,
@@ -60,11 +62,14 @@ onMounted(() => {
           v-motion-slide-visible-bottom="{ delay: index * 100 }"
           class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 flex flex-col h-full"
         >
-          <!-- Placeholder Image Area -->
-          <div class="h-48 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 relative overflow-hidden flex items-center justify-center">
-            <span class="text-4xl opacity-20 group-hover:scale-110 transition-transform duration-500 font-bold">
-              {{ project.name.substring(0, 2).toUpperCase() }}
-            </span>
+          <!-- Dynamic GitHub Social Preview / OpenGraph Image -->
+          <div class="h-48 relative overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+            <img 
+              :src="`https://opengraph.githubassets.com/1/${project.ownerLogin}/${project.originalName}`" 
+              :alt="project.name"
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
             <div class="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-colors duration-300"></div>
           </div>
           
