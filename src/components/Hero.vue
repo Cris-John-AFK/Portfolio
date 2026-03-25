@@ -42,7 +42,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section id="home" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-screen">
+  <section id="home" class="relative pt-24 pb-12 lg:pt-32 lg:pb-20 overflow-hidden flex items-center min-h-[90vh] lg:min-h-screen">
     <!-- Clean Background Elements -->
     <div class="absolute inset-0 z-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
     <div class="absolute inset-0 z-0">
