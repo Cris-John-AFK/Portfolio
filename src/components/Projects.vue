@@ -1,9 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import { ExternalLink, Code2, Loader2, ChevronLeft, ChevronRight, X, MessageSquare, Briefcase } from 'lucide-vue-next'
+import { ExternalLink, Code2, Loader2, ChevronLeft, ChevronRight, X, MessageSquare, Briefcase, BookOpen, FileText } from 'lucide-vue-next'
 import { contactStore } from '../store'
-
-const githubUsername = 'Cris-John-AFK'
 
 const loading = ref(false) // Set to false since we are using hardcoded data now
 
@@ -30,6 +28,19 @@ const handleInquiry = () => {
 // Static featured projects: This allows you to set your real GitHub repos to PRIVATE
 // while still keeping them fully visible and professional on your portfolio!
 const projects = ref([
+  {
+    id: 0,
+    name: 'LAMMS Research Project',
+    originalName: 'LAMMS-Attendance-System',
+    description: 'My published research on a Learner\'s Attendance Monitoring and Management System. Features advanced QR integration, real-time analytics for teachers, and automated report generation. Published on ResearchGate.',
+    url: '', 
+    researchUrl: 'https://www.researchgate.net/publication/401703874_LAMMS_A_Learner\'s_Attendance_Monitoring_and_Management_System_for_Naawan_Central_School_Misamis_Oriental_Philippines',
+    homepage: '',
+    language: 'PHP & JavaScript',
+    topics: ['QR Technology', 'Academic Research', 'Automation'],
+    images: ['/dashboard.jpg', '/report.jpg'],
+    activeImgIndex: 0
+  },
   {
     id: 1,
     name: 'My Portfolio',
@@ -250,37 +261,49 @@ onUnmounted(() => {
               {{ selectedProject.description }}
             </p>
 
-            <div class="flex flex-col space-y-4 mt-auto">
-              <button 
-                @click="handleInquiry"
-                class="flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all shadow-lg shadow-blue-500/25 hover:-translate-y-1"
-              >
-                <MessageSquare class="w-5 h-5 mr-3" />
-                Inquire About This Project
-              </button>
-              
-              <div class="grid grid-cols-2 gap-4">
+              <!-- Action Buttons -->
+              <div class="flex flex-col space-y-4 mt-auto">
+                <!-- Highlighted Research Link -->
                 <a 
-                  v-if="selectedProject.homepage" 
-                  :href="selectedProject.homepage" 
+                  v-if="selectedProject.researchUrl" 
+                  :href="selectedProject.researchUrl" 
                   target="_blank"
-                  class="flex items-center justify-center p-4 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-bold transition-all"
+                  class="flex items-center justify-center px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white rounded-2xl font-bold transition-all shadow-lg shadow-purple-500/25 hover:-translate-y-1"
                 >
-                  <ExternalLink class="w-5 h-5 mr-2" /> 
-                  Live Demo
+                  <FileText class="w-5 h-5 mr-3" />
+                  Read Full Publication
                 </a>
-                <!-- Only show Codebase if it's the public portfolio or OJT manager -->
-                <a 
-                  v-if="selectedProject.name.toLowerCase().includes('portfolio') || selectedProject.name.toLowerCase().includes('ojt')" 
-                  :href="selectedProject.url" 
-                  target="_blank"
-                  class="flex items-center justify-center p-4 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-bold transition-all"
+
+                <button 
+                  @click="handleInquiry"
+                  class="flex items-center justify-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold transition-all shadow-lg shadow-blue-500/25 hover:-translate-y-1"
                 >
-                  <Code2 class="w-5 h-5 mr-2" /> 
-                  Codebase
-                </a>
+                  <MessageSquare class="w-5 h-5 mr-3" />
+                  Inquire About This Project
+                </button>
+                
+                <div class="grid grid-cols-2 gap-4">
+                  <a 
+                    v-if="selectedProject.homepage" 
+                    :href="selectedProject.homepage" 
+                    target="_blank"
+                    class="flex items-center justify-center p-4 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-bold transition-all"
+                  >
+                    <ExternalLink class="w-5 h-5 mr-2" /> 
+                    Live Demo
+                  </a>
+                  <!-- Only show Codebase if it's the public portfolio or OJT manager -->
+                  <a 
+                    v-if="selectedProject.url && (selectedProject.name.toLowerCase().includes('portfolio') || selectedProject.name.toLowerCase().includes('ojt'))" 
+                    :href="selectedProject.url" 
+                    target="_blank"
+                    class="flex items-center justify-center p-4 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 font-bold transition-all"
+                  >
+                    <Code2 class="w-5 h-5 mr-2" /> 
+                    Codebase
+                  </a>
+                </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
