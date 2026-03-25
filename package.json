@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
+    "@vercel/analytics": "^2.0.1",
     "@vueuse/core": "^14.2.1",
     "@vueuse/motion": "^3.0.3",
     "firebase": "^12.11.0",
