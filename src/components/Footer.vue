@@ -9,22 +9,21 @@ import { Github, Linkedin, Mail, Twitter } from 'lucide-vue-next'
         <!-- Brand -->
         <div class="text-center md:text-left">
           <a href="#home" class="text-2xl font-bold tracking-tight text-blue-400 mb-2 block">
-            DevPort.
+            Web Dev Portfolio
           </a>
           <p class="text-gray-400 text-sm">
             Building robust web applications with a focus on UI/UX and performance.
           </p>
         </div>
 
-        <!-- Links -->
-        <div class="flex justify-center space-x-6">
-          <a href="#" class="text-gray-400 hover:text-white transition-colors" aria-label="Github">
+        <div class="flex justify-center flex-wrap gap-6 pt-4">
+          <a href="https://github.com/Cris-John-AFK" target="_blank" class="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-800 rounded-full" aria-label="Github">
             <Github class="w-6 h-6" />
           </a>
-          <a href="#" class="text-gray-400 hover:text-blue-500 transition-colors" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/cris-john-ca%C3%B1ales-06b407328" target="_blank" class="text-gray-400 hover:text-blue-500 transition-colors p-2 hover:bg-gray-800 rounded-full" aria-label="LinkedIn">
             <Linkedin class="w-6 h-6" />
           </a>
-          <a href="#" class="text-gray-400 hover:text-red-400 transition-colors" aria-label="Email">
+          <a href="mailto:crisjohn.canales@gmail.com" class="text-gray-400 hover:text-red-400 transition-colors p-2 hover:bg-gray-800 rounded-full" aria-label="Email">
             <Mail class="w-6 h-6" />
           </a>
         </div>

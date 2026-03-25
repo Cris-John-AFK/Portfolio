@@ -46,7 +46,7 @@ const scrollTo = (href) => {
   >
     <div class="container mx-auto px-4 md:px-6 lg:px-8 max-w-7xl flex items-center justify-between">
       <a href="#home" class="text-2xl font-bold tracking-tight text-blue-600 dark:text-blue-400" @click.prevent="scrollTo('#home')">
-        DevPort.
+        Web Dev Portfolio
       </a>
 
       <!-- Desktop Nav -->
