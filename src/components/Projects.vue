@@ -3,9 +3,9 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { ExternalLink, Code2, Loader2, ChevronLeft, ChevronRight, X, MessageSquare, Briefcase } from 'lucide-vue-next'
 import { contactStore } from '../store'
 
-const projects = ref([])
-const loading = ref(true)
 const githubUsername = 'Cris-John-AFK'
+
+const loading = ref(false) // Set to false since we are using hardcoded data now
 
 // Selected project for the enlargement modal
 const selectedProject = ref(null)
