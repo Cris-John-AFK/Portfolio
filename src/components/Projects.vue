@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ExternalLink, Code2, Loader2, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 
 const projects = ref([])
@@ -64,8 +64,23 @@ const prevImage = (project) => {
   project.activeImgIndex = (project.activeImgIndex - 1 + project.images.length) % project.images.length
 }
 
+let autoSlideInterval = null
+
 onMounted(() => {
   fetchProjects()
+  
+  // Automatically slide through images every 3.5 seconds
+  autoSlideInterval = setInterval(() => {
+    projects.value.forEach(p => {
+      if (p.images && p.images.length > 1) {
+        nextImage(p)
+      }
+    })
+  }, 3500)
+})
+
+onUnmounted(() => {
+  if (autoSlideInterval) clearInterval(autoSlideInterval)
 })
 </script>
 

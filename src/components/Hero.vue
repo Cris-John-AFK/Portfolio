@@ -1,11 +1,44 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
 import { ArrowRight, Code, Database, LayoutTemplate } from 'lucide-vue-next'
 
-const floatingProjects = [
-  { name: 'LAMMS System', tech: 'Vue & Firebase', icon: Database, delay: '0s', position: 'top-[15%] -left-2 md:-left-20' },
-  { name: 'Portfolio Web', tech: 'Vue & Tailwind', icon: LayoutTemplate, delay: '2s', position: 'bottom-[20%] -left-0 md:-left-12' },
-  { name: 'Client App', tech: 'Node & APIs', icon: Code, delay: '3.5s', position: 'top-[45%] -right-4 md:-right-16' },
-]
+const heroProjects = ref([
+  {
+    name: 'This Portfolio',
+    tech: 'VUE & TAILWIND',
+    description: 'Dynamic portfolio with GitHub sync.',
+    images: ['/portfolio-preview.png', '/portfolio-preview2.png'],
+    activeImgIndex: 0,
+    delay: '0s',
+    position: 'top-[10%] -left-4 md:-left-28 w-48 md:w-64'
+  },
+  {
+    name: 'OJT Manager',
+    tech: 'JS & SQLITE',
+    description: 'A premium DTR manager system.',
+    // If they haven't uploaded an image yet, it will fail gracefully or show broken icon. We use their OJT preview since they mapped it!
+    images: ['/ojt-preview.png'], 
+    activeImgIndex: 0,
+    delay: '3.5s',
+    position: 'bottom-[12%] -right-4 md:-right-24 w-48 md:w-64'
+  }
+])
+
+let heroInterval = null
+
+onMounted(() => {
+  heroInterval = setInterval(() => {
+    heroProjects.value.forEach(p => {
+      if (p.images && p.images.length > 1) {
+        p.activeImgIndex = (p.activeImgIndex + 1) % p.images.length
+      }
+    })
+  }, 3500)
+})
+
+onUnmounted(() => {
+  if (heroInterval) clearInterval(heroInterval)
+})
 </script>
 
 <template>
@@ -67,21 +100,41 @@ const floatingProjects = [
             />
           </div>
 
-          <!-- Glassmorphism Floating Project Cards -->
+          <!-- Floating Miniature Project Showcase Cards -->
           <div 
-            v-for="(card, i) in floatingProjects" 
+            v-for="(card, i) in heroProjects" 
             :key="i"
-            :class="`absolute ${card.position} z-20 pointer-events-none sm:pointer-events-auto`"
-            :style="`animation: floatY 8s ease-in-out infinite; animation-delay: ${card.delay};`"
+            :class="`absolute ${card.position} z-20 pointer-events-none hidden sm:flex`"
+            :style="`animation: floatY 10s ease-in-out infinite; animation-delay: ${card.delay};`"
           >
-            <div class="bg-white/40 dark:bg-gray-900/40 backdrop-blur-xl border border-white/50 dark:border-white/10 rounded-2xl p-3 md:p-4 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex items-center space-x-4 transform transition-transform hover:scale-110 hover:!bg-white/60 dark:hover:!bg-gray-900/60 cursor-default">
-              <div class="bg-blue-500 dark:bg-blue-600 p-2.5 rounded-xl text-white shadow-md">
-                <component :is="card.icon" class="w-5 h-5 md:w-6 md:h-6" />
+            <div class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-2xl border border-white dark:border-gray-700 rounded-xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col transform transition-all duration-500 hover:scale-105 pointer-events-auto cursor-default">
+              
+              <!-- Auto-Sliding Image Area -->
+              <div class="h-24 md:h-32 relative overflow-hidden bg-gray-200 dark:bg-gray-800">
+                <img 
+                  :src="card.images[card.activeImgIndex]" 
+                  :alt="card.name"
+                  class="w-full h-full object-cover object-top transition-transform duration-700 scale-100"
+                />
+                <div class="absolute inset-0 bg-blue-600/0 hover:bg-blue-600/10 transition-colors duration-300"></div>
+
+                <!-- Tiny Dots Indicator -->
+                <div v-if="card.images.length > 1" class="absolute bottom-1.5 left-0 right-0 flex justify-center gap-1">
+                  <div v-for="(_, imgIdx) in card.images" :key="imgIdx" 
+                       :class="['w-1 h-1 rounded-full transition-all duration-300', card.activeImgIndex === imgIdx ? 'bg-white scale-125 shadow-sm' : 'bg-white/50']">
+                  </div>
+                </div>
               </div>
-              <div class="pr-3 hidden sm:block">
-                <p class="text-[14px] md:text-base font-extrabold tracking-tight text-gray-900 dark:text-white leading-none mb-1">{{ card.name }}</p>
-                <p class="text-[11px] md:text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-widest">{{ card.tech }}</p>
+              
+              <!-- Project Details -->
+              <div class="p-3 md:p-4">
+                <p class="text-[13px] md:text-[15px] font-extrabold tracking-tight text-gray-900 dark:text-white leading-none mb-1">{{ card.name }}</p>
+                <p class="text-[9px] md:text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-1.5">{{ card.tech }}</p>
+                <p class="text-[10px] md:text-[11px] text-gray-600 dark:text-gray-400 leading-snug line-clamp-2">
+                  {{ card.description }}
+                </p>
               </div>
+
             </div>
           </div>
           
