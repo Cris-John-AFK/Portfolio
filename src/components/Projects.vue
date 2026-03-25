@@ -234,11 +234,11 @@ onUnmounted(() => {
           </button>
 
           <!-- Modal Left Side (Visuals) -->
-          <div class="lg:w-3/5 h-[350px] md:h-[500px] lg:h-full relative bg-black flex items-center justify-center">
+          <div class="lg:w-7/12 relative bg-gray-950 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-white/5 min-h-[300px] md:min-h-[500px]">
             <img 
               :src="selectedProject.images[selectedProject.activeImgIndex]" 
               :alt="selectedProject.name"
-              class="w-full h-full object-contain p-4 md:p-12"
+              class="w-full h-full object-contain p-4 md:p-8 lg:p-12"
             />
             
             <div v-if="selectedProject.images.length > 1" class="absolute inset-0 flex items-center justify-between px-6">
@@ -252,7 +252,7 @@ onUnmounted(() => {
           </div>
 
           <!-- Modal Right Side (Content) -->
-          <div class="lg:w-2/5 p-10 md:p-16 overflow-y-auto bg-gray-900 border-l border-white/5 flex flex-col">
+          <div class="lg:w-5/12 p-8 md:p-14 overflow-y-auto bg-gray-900 flex flex-col justify-center">
             <div class="flex items-center space-x-3 mb-10">
               <div class="w-12 h-12 rounded-2xl flex items-center justify-center" 
                    :style="{ backgroundColor: selectedProject.accentColor + '20' }">
