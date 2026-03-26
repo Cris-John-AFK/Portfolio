@@ -64,37 +64,40 @@ const skillCategories = computed(() => {
           v-motion-slide-visible-bottom="{ delay: index * 100 }"
           class="neon-card group"
         >
-          <!-- Category Header Top -->
-          <div class="flex items-center justify-between mb-8 w-full">
-             <h3 class="text-2xl font-black text-white dark:text-white uppercase tracking-tighter">{{ category.name }}</h3>
-             <component :is="category.icon" class="w-8 h-8 text-[#40c9ff]" />
-          </div>
+          <!-- Content Wrapper with higher Z-Index -->
+          <div class="relative z-10 w-full h-full flex flex-col">
+            <!-- Category Header Top -->
+            <div class="flex items-center justify-between mb-8 w-full">
+               <h3 class="text-2xl font-black text-white uppercase tracking-tighter">{{ category.name }}</h3>
+               <component :is="category.icon" class="w-8 h-8 text-[#40c9ff]" />
+            </div>
 
-          <!-- Skill List -->
-          <div class="space-y-8 w-full">
-            <div v-for="skill in category.skills" :key="skill.name" class="space-y-3 group/skill">
-              <div class="flex justify-between items-end">
-                <span class="text-sm font-bold text-gray-300 dark:text-gray-200 group-hover/skill:text-[#e81cff] transition-colors">
-                  {{ skill.name }}
-                </span>
-                <span class="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-                  {{ skill.level }}%
-                </span>
-              </div>
-              
-              <div class="relative w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
-                <div 
-                  class="h-full rounded-full bg-gradient-to-r from-[#e81cff] to-[#40c9ff] transition-all duration-1000 ease-out fill-glow"
-                  :style="{ width: `${skill.level}%` }"
-                ></div>
+            <!-- Skill List -->
+            <div class="space-y-8 w-full">
+              <div v-for="skill in category.skills" :key="skill.name" class="space-y-3 group/skill">
+                <div class="flex justify-between items-end">
+                  <span class="text-sm font-bold text-gray-300 group-hover/skill:text-[#e81cff] transition-colors">
+                    {{ skill.name }}
+                  </span>
+                  <span class="text-[10px] font-black text-gray-400 dark:text-gray-500 uppercase tracking-widest">
+                    {{ skill.level }}%
+                  </span>
+                </div>
+                
+                <div class="relative w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
+                  <div 
+                    class="h-full rounded-full bg-gradient-to-r from-[#e81cff] to-[#40c9ff] transition-all duration-1000 ease-out fill-glow"
+                    :style="{ width: `${skill.level}%` }"
+                  ></div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Bottom Branding -->
-          <div class="mt-auto pt-8 w-full flex justify-between items-center border-t border-white/10">
-             <span class="text-[10px] font-black text-[#e81cff] tracking-[0.2em] uppercase">Tech Stack 0{{ index + 1 }}</span>
-             <Cpu class="w-5 h-5 text-gray-600" />
+            <!-- Bottom Branding -->
+            <div class="mt-auto pt-8 w-full flex justify-between items-center border-t border-white/10">
+               <span class="text-[10px] font-black text-[#e81cff] tracking-[0.2em] uppercase">Tech Stack 0{{ index + 1 }}</span>
+               <Cpu class="w-5 h-5 text-gray-600" />
+            </div>
           </div>
         </div>
       </div>
@@ -105,10 +108,9 @@ const skillCategories = computed(() => {
 <style scoped>
 .neon-card {
   position: relative;
-  width: 100%;
-  max-width: 400px;
+  width: 400px; 
   height: 580px;
-  background-color: #000;
+  background-color: #000; /* Solid black base */
   display: flex;
   flex-direction: column;
   padding: 40px;
@@ -116,28 +118,32 @@ const skillCategories = computed(() => {
   cursor: pointer;
   color: white;
   transition: all 0.3s ease;
+  z-index: 1; /* Main stacking context */
 }
 
 /* Light mode override for card background */
 :global(.light) .neon-card {
-  background-color: #111827; /* Keeping it dark for the neon pop, or we can make it lighter if preferred */
+  background-color: #030712; /* Keep it dark for the neon contrast */
 }
 
 .neon-card::before {
   content: '';
   position: absolute;
-  inset: -4px; /* Border thickness */
+  inset: 0;
+  left: -5px;
   margin: auto;
+  width: 410px; /* 10px wider than card */
+  height: 590px; /* 10px taller than card */
   border-radius: 14px;
   background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
-  z-index: -10;
+  z-index: -10; /* Definitely behind */
   pointer-events: none;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .neon-card::after {
   content: "";
-  z-index: -1;
+  z-index: -1; /* Behind card background but in front of ::before */
   position: absolute;
   inset: 0;
   background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
@@ -148,12 +154,12 @@ const skillCategories = computed(() => {
 }
 
 .neon-card:hover::after {
-  filter: blur(40px);
-  opacity: 0.8;
+  filter: blur(50px);
+  opacity: 1;
 }
 
 .neon-card:hover::before {
-  transform: rotate(-90deg) scaleX(1.1) scaleY(0.85);
+  transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
 }
 
 .fill-glow {
