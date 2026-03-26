@@ -103,9 +103,8 @@ onUnmounted(() => {
           <div class="absolute -top-10 left-1/2 -translate-x-1/2 z-30 pointer-events-none" v-motion-slide-visible-bottom="{ delay: 1500 }">
              <div class="relative flex items-center justify-center">
                <div class="bg-white dark:bg-gray-800 px-6 py-4 rounded-[2rem] shadow-2xl border border-gray-100 dark:border-gray-700/50 flex items-center gap-3 animate-bounce-slow">
-                 <span class="w-3 h-3 rounded-full bg-blue-500 animate-pulse"></span>
-                 <p class="text-sm md:text-base font-black text-gray-900 dark:text-white whitespace-nowrap tracking-tight italic">
-                   "I'm ready for new opportunities!" 🚀
+                 <p class="text-sm md:text-base font-black text-gray-900 dark:text-white whitespace-nowrap tracking-tight">
+                   "I'm ready for new opportunities!"
                  </p>
                  <!-- Speech Arrow -->
                  <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 w-5 h-5 bg-white dark:bg-gray-800 border-r border-b border-gray-100 dark:border-gray-700/50 rotate-45 -z-10"></div>
