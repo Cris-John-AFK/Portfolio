@@ -67,22 +67,22 @@ const skillCategories = computed(() => {
       >
         <!-- Card Content -->
         <div class="card-inner">
-          <div class="flex items-center justify-between mb-6">
-            <component :is="category.icon" class="w-8 h-8 text-blue-500" />
-            <span class="text-[10px] font-black uppercase text-gray-400 dark:text-gray-500 tracking-tighter">
+          <div class="flex items-center justify-between mb-10">
+            <component :is="category.icon" class="w-10 h-10 text-blue-500" />
+            <span class="text-xs font-black uppercase text-gray-400 dark:text-gray-500 tracking-tighter">
                0{{ index + 1 }}
             </span>
           </div>
           
-          <div class="space-y-4">
-            <div v-for="skill in category.skills" :key="skill.name" class="space-y-1.5">
-              <div class="flex justify-between text-[10px] font-bold">
-                <span class="text-gray-800 dark:text-gray-200">{{ skill.name }}</span>
+          <div class="space-y-8">
+            <div v-for="skill in category.skills" :key="skill.name" class="space-y-3">
+              <div class="flex justify-between text-xs md:text-sm font-bold">
+                <span class="text-gray-800 dark:text-gray-200 tracking-tight">{{ skill.name }}</span>
                 <span class="text-blue-500">{{ skill.level }}%</span>
               </div>
-              <div class="w-full bg-gray-300/30 dark:bg-white/5 rounded-full h-1 overflow-hidden">
+              <div class="w-full bg-gray-300/30 dark:bg-white/5 rounded-full h-1.5 overflow-hidden">
                 <div 
-                  class="h-full bg-blue-500 transition-all duration-1000 ease-out fill-glow"
+                  class="h-full bg-blue-500 transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(59,130,246,0.5)]"
                   :style="{ width: `${skill.level}%` }"
                 ></div>
               </div>
@@ -100,24 +100,24 @@ const skillCategories = computed(() => {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px 0;
+  padding: 120px 0;
   width: 100%;
 }
 
 .glass-card {
   position: relative;
-  width: 280px; 
-  height: 340px; 
+  width: 360px; /* Scaled up from 280px */
+  height: 520px; /* Scaled up from 340px */
   background: linear-gradient(rgba(255, 255, 255, 0.1), transparent);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  padding: 30px;
+  padding: 45px;
   transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-  border-radius: 24px;
-  margin: 0 -100px; 
-  backdrop-filter: blur(15px);
+  border-radius: 36px;
+  margin: 0 -140px; /* Adjusted overlap for larger cards */
+  backdrop-filter: blur(20px);
   transform: rotate(calc(var(--r) * 1deg));
   z-index: 1;
 }
