@@ -110,7 +110,7 @@ const skillCategories = computed(() => {
   position: relative;
   width: 400px; 
   height: 580px;
-  background-color: #000; /* Solid black base */
+  background-color: transparent; /* No background here */
   display: flex;
   flex-direction: column;
   padding: 40px;
@@ -118,12 +118,7 @@ const skillCategories = computed(() => {
   cursor: pointer;
   color: white;
   transition: all 0.3s ease;
-  z-index: 1; /* Main stacking context */
-}
-
-/* Light mode override for card background */
-:global(.light) .neon-card {
-  background-color: #030712; /* Keep it dark for the neon contrast */
+  z-index: 1;
 }
 
 .neon-card::before {
@@ -132,34 +127,51 @@ const skillCategories = computed(() => {
   inset: 0;
   left: -5px;
   margin: auto;
-  width: 410px; /* 10px wider than card */
-  height: 590px; /* 10px taller than card */
+  width: 410px; /* Gradient layer is LARGER */
+  height: 590px;
   border-radius: 14px;
   background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
-  z-index: -10; /* Definitely behind */
+  z-index: -10; /* At the very back */
   pointer-events: none;
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .neon-card::after {
   content: "";
-  z-index: -1; /* Behind card background but in front of ::before */
   position: absolute;
-  inset: 0;
-  background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
-  opacity: 0.5;
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000; /* THIS is the solid black card front */
+  border-radius: 12px;
+  z-index: -1; /* In front of gradient, behind content */
+  transition: background-color 0.3s ease;
 }
 
+/* Ensure content stays on top of the black card layer */
+.z-10 {
+  z-index: 20;
+}
+
+/* Light mode adjustments */
+:global(.light) .neon-card::after {
+  background-color: #030712; 
+}
+
+/* The Glow Shadow */
 .neon-card:hover::after {
-  filter: blur(50px);
-  opacity: 1;
+  background-color: #000;
+  box-shadow: 0 0 50px rgba(232, 28, 255, 0.2);
 }
 
 .neon-card:hover::before {
   transform: rotate(-90deg) scaleX(1.34) scaleY(0.77);
+  filter: blur(5px);
+}
+
+.fill-glow {
+  box-shadow: 0 0 10px rgba(232, 28, 255, 0.5);
 }
 
 .fill-glow {
